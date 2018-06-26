@@ -1,12 +1,12 @@
 import { observable, action } from "mobx";
 
 class LoginStore {
-  @observable email = "";
-  @observable agree = false;
+  @observable email = ""; 
   @observable password = "";
   @observable isValid = false;
   @observable emailError = "";
   @observable passwordError = "";
+  @observable agree = false;
 
   @action
   emailOnChange(id) {

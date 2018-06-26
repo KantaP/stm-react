@@ -1,36 +1,48 @@
 // @flow
 import React from "react";
-import { StackNavigator, DrawerNavigator } from "react-navigation";
 import { Root } from "native-base";
-import Login from "./container/LoginContainer";
-import Home from "./container/HomeContainer";
-import BlankPage from "./container/BlankPageContainer";
-import Sidebar from "./container/SidebarContainer";
+import { isSignedIn } from './utils/authenticate'
 
-const Drawer = DrawerNavigator(
-	{
-		Home: { screen: Home },
-	},
-	{
-		initialRouteName: "Home",
-		contentComponent: props => <Sidebar {...props} />,
+import { RootNavigator } from "./RootConfigure"
+export interface Props {}
+export interface State {
+	signedIn: boolean;
+	readyState: boolean
+}
+export default class App extends React.Component<Props , State> {
+	state: {
+		signedIn: boolean,
+		readyState: boolean
+	};
+	constructor() {
+		super();
+		this.state = {
+			signedIn: false,
+			readyState: false
+		};
 	}
-);
-
-const App = StackNavigator(
-	{
-		Login: { screen: Login },
-		BlankPage: { screen: BlankPage },
-		Drawer: { screen: Drawer },
-	},
-	{
-		initialRouteName: "Login",
-		headerMode: "none",
+	async componentWillMount() {
+		const user = await isSignedIn()
+		console.log('user logged:' , user)
+		this.setState({signedIn:(user) ? true : false , readyState: true})
 	}
-);
 
-export default () => (
-	<Root>
-		<App />
-	</Root>
-);
+	render() {
+		console.log(this.state)
+		const { signedIn  , readyState} = this.state;
+    	const Layout = RootNavigator(signedIn);
+		if(readyState) {
+			return (
+
+					<Root>
+						<Layout />
+					</Root>
+
+			)
+		}else {
+			return null
+		}
+		
+	}
+}
+

@@ -27,7 +27,7 @@ class Login extends React.Component<Props, State> {
 					</Body>
 				</Header>
 				<Content style={{backgroundColor:"#fff"}}>
-					<Tabs initialPage={1}>
+					<Tabs initialPage={0}>
 						<Tab heading="Sign In">
 							{this.props.loginForm}
 							<View padder style={{marginTop:"50%"}}>

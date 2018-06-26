@@ -2,58 +2,63 @@ import * as React from "react";
 import {
   Container,
   Header,
-  Title,
   Content,
   Text,
   Button,
   Icon,
-  Left,
-  Body,
-  Right,
   List,
-  ListItem
+  ListItem , 
+  Item , 
+  Input,
+  Footer,
+  FooterTab
 } from "native-base";
 
 import styles from "./styles";
 export interface Props {
   navigation: any;
   list: any;
+  myself: any;
 }
+
 export interface State {}
 class Home extends React.Component<Props, State> {
   render() {
     return (
       <Container style={styles.container}>
-        <Header>
-          <Left>
-            <Button transparent>
-              <Icon
-                active
-                name="menu"
-                onPress={() => this.props.navigation.navigate("DrawerOpen")}
-              />
-            </Button>
-          </Left>
-          <Body>
-            <Title>Home</Title>
-          </Body>
-          <Right />
+        <Header searchBar rounded>
+          <Item>
+            <Icon name="ios-search" />
+            <Input placeholder="Search" />
+            <Icon name="ios-people" />
+          </Item>
+          <Button transparent>
+            <Text>Search</Text>
+          </Button>
         </Header>
         <Content>
-          <List>
-            {this.props.list.map((item, i) => (
-              <ListItem
-                key={i}
-                onPress={() =>
-                  this.props.navigation.navigate("BlankPage", {
-                    name: { item }
-                  })}
-              >
-                <Text>{item}</Text>
-              </ListItem>
-            ))}
-          </List>
+        
+          {/* <Button onPress={() => this.props.navigation.navigate("DrawerOpen")}>
+            <Text>Drawer</Text>
+          </Button> */}
+          {this.props.myself}
         </Content>
+        <Footer>
+          <FooterTab>
+            <Button>
+              <Icon name="apps" />
+            </Button>
+            <Button>
+              <Icon name="camera" />
+            </Button>
+            <Button active>
+              <Icon active name="navigate" />
+            </Button>
+            <Button>
+              <Icon name="person" />
+            </Button>
+          </FooterTab>
+        </Footer>
       </Container>
     );
   }

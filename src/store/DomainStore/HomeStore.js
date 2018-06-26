@@ -3,7 +3,7 @@ import { observable, action } from "mobx";
 class HomeStore {
   @observable hasErrored = false;
   @observable isLoading = true;
-  @observable user = Object.create(null)
+  @observable userData = Object.create(null)
   @observable items = [];
 
   @action
@@ -14,7 +14,7 @@ class HomeStore {
 
   @action
   setUser(data) {
-    this.user = data
+    this.userData = data
   }
 }
 

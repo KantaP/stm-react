@@ -2,8 +2,9 @@
 import * as React from "react";
 import { Item, Input, Icon, Form, Toast , Button, Text , View} from "native-base";
 import { observer, inject } from "mobx-react/native";
+import {ToastAndroid} from 'react-native'
 import Login from "../../stories/screens/Login";
-
+import { onSignIn , setStorage } from '../../utils/authenticate'
 export interface Props {
 	navigation: any,
 	loginForm: any,
@@ -24,30 +25,40 @@ export default class LoginContainer extends React.Component<Props, State> {
 			password:this.props.loginForm.password
 		})
 		if (this.props.loginForm.isValid) {
-			// fetch("http://stmtestwebservice.ecoachmanager.com/parent/login" , {
-			// 	method: 'POST',
-			// 	headers: {
-			// 		'Accept': 'application/json',
-			// 		'Content-Type': 'application/json',
-			// 	},
-			// 	body,
-			// })
-			// .then((response)=>response.json())
-			// .then((data)=>{
-			// 	this.props.loginForm.clearStore();
-			// 	this.props.mainStore.setUser(data)
-			// 	this.props.navigation.navigate('Drawer')
-			// })
-			// .catch((err)=>console.log(err))
-			this.props.loginForm.clearStore();
-			this.props.navigation.navigate('Drawer')
+			fetch("http://192.168.1.21:3001/login" , {
+				method: 'POST',
+				headers: {
+					'Accept': 'application/json',
+					'Content-Type': 'application/json',
+				},
+				body,
+			})
+			.then((response)=>{
+				if(response.status == 200) {
+					return response.json()
+				}else {
+					ToastAndroid.show("Enter Valid Email & password!" , ToastAndroid.SHORT);
+				}
+			})
+			.then((data)=>{
+				if(data) {
+					console.log(data)
+					onSignIn()
+					.then(()=>{
+						return setStorage('@user', data)
+					})
+					.then(()=>{
+						this.props.loginForm.clearStore();
+						this.props.mainStore.setUser(data)
+						this.props.navigation.navigate('Drawer')
+					})
+					.catch((err)=>console.log(err))
+				}
+
+			})
+			.catch((err)=>console.log(err))
 		} else {
-			Toast.show({
-				text: "Enter Valid Email & password!",
-				duration: 2000,
-				position: "top",
-				textStyle: { textAlign: "center" },
-			});
+			ToastAndroid.show("Enter Valid Email & password!" , ToastAndroid.SHORT);
 		}
 	}
 	render() {
