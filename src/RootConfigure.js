@@ -1,13 +1,15 @@
 
 import React from "react";
-import { StackNavigator, DrawerNavigator } from "react-navigation";
+import { StackNavigator, DrawerNavigator  } from "react-navigation";
 import Login from "./container/LoginContainer";
 import Home from "./container/HomeContainer";
 import BlankPage from "./container/BlankPageContainer";
 import Sidebar from "./container/SidebarContainer";
+
+
 const Drawer = DrawerNavigator(
     {
-        Home: { screen: Home },
+        Home: { screen: Home }
     },
     {
         initialRouteName: "Home",

@@ -15,6 +15,15 @@
     "androidStatusBar": {
       "barStyle": "light-content",
       "backgroundColor": "#334393"
+    },
+    "ios": {
+      "bundleIdentifier": "com.kantapong.stmreact"
+    },
+    "android": {
+      "package": "com.kantapong.stmreact",
+      "config": {
+          "googleMaps": { "apiKey": "AIzaSyA5PhAUhtxbda_e2Z_WenWk2fTlQczS32g" }   
+      }
     }
   }
 }

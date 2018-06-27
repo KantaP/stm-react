@@ -8,6 +8,7 @@ export const getParentPassenger = gql`
         passenger_id
         first_name
         surname
+        photo
         routeToday {
           j_id
           collection_address {

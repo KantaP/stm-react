@@ -36,6 +36,7 @@
     ]
   },
   "dependencies": {
+    "@skele/components": "^1.0.0-alpha.29",
     "apollo-boost": "^0.1.10",
     "apollo-cache-inmemory": "^1.2.5",
     "apollo-link": "^1.2.2",

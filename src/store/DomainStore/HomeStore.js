@@ -5,6 +5,12 @@ class HomeStore {
   @observable isLoading = true;
   @observable userData = Object.create(null)
   @observable items = [];
+  @observable footerActive = ""
+
+  @action 
+  setFooter(footer) {
+    this.footerActive = footer
+  }
 
   @action
   fetchItems(data) {

@@ -18,7 +18,9 @@ import styles from "./styles";
 export interface Props {
   navigation: any;
   list: any;
-  myself: any;
+  childlist: any;
+  footertab: any;
+  onSwitchScreen: any;
 }
 
 export interface State {}
@@ -41,21 +43,26 @@ class Home extends React.Component<Props, State> {
           {/* <Button onPress={() => this.props.navigation.navigate("DrawerOpen")}>
             <Text>Drawer</Text>
           </Button> */}
-          {this.props.myself}
+          {this.props.footertab === 'feeds' && this.props.childlist}
+          {this.props.footertab === 'myself' && 
+          (
+            <Button onPress={() => this.props.navigation.navigate("DrawerOpen")}>
+            </Button>
+          )}
         </Content>
         <Footer>
           <FooterTab>
-            <Button>
-              <Icon name="apps" />
+            <Button active={this.props.footertab === 'feeds'} onPress={()=>this.props.onSwitchScreen("feeds")}>
+              <Icon  name="apps" />
             </Button>
-            <Button>
-              <Icon name="camera" />
+            <Button active={this.props.footertab === 'exception'} onPress={()=>this.props.onSwitchScreen("exception")}>
+              <Icon  name="camera" />
             </Button>
-            <Button active>
-              <Icon active name="navigate" />
+            <Button active={this.props.footertab === 'setting'} onPress={()=>this.props.onSwitchScreen("setting")}>
+              <Icon  name="navigate" />
             </Button>
-            <Button>
-              <Icon name="person" />
+            <Button active={this.props.footertab === 'myself'} onPress={()=>this.props.onSwitchScreen("myself")}>
+              <Icon  name="person" />
             </Button>
           </FooterTab>
         </Footer>
