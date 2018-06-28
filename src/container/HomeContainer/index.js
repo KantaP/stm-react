@@ -3,7 +3,7 @@ import * as React from "react";
 import { observer, inject } from "mobx-react/native";
 
 import Home from "../../stories/screens/Home";
-import data from "./data";
+import ChildrenList from "../ChildrenList"
 
 
 export interface Props {
@@ -18,7 +18,9 @@ export default class HomeContainer extends React.Component<Props, State> {
 	render() {
 		return (
 			<Home 
-			navigation={this.props.navigation} />
+				navigation={this.props.navigation} 
+				childrenList={<ChildrenList />}
+			/>
 		);
 	}
 }

@@ -50,7 +50,7 @@ export default class LoginContainer extends React.Component<Props, State> {
 					.then(()=>{
 						this.props.loginForm.clearStore();
 						this.props.mainStore.setUser(data)
-						this.props.navigation.navigate('Drawer')
+						this.props.navigation.navigate('App')
 					})
 					.catch((err)=>console.log(err))
 				}

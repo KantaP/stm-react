@@ -13,16 +13,12 @@ import {
   Footer,
   FooterTab
 } from "native-base";
-
 import styles from "./styles";
+
 export interface Props {
   navigation: any;
-  list: any;
-  childlist: any;
-  footertab: any;
-  onSwitchScreen: any;
+  childrenList: any;
 }
-
 export interface State {}
 class Home extends React.Component<Props, State> {
   render() {
@@ -39,33 +35,8 @@ class Home extends React.Component<Props, State> {
           </Button>
         </Header>
         <Content>
-        
-          {/* <Button onPress={() => this.props.navigation.navigate("DrawerOpen")}>
-            <Text>Drawer</Text>
-          </Button> */}
-          {this.props.footertab === 'feeds' && this.props.childlist}
-          {this.props.footertab === 'myself' && 
-          (
-            <Button onPress={() => this.props.navigation.navigate("DrawerOpen")}>
-            </Button>
-          )}
+          {this.props.childrenList}
         </Content>
-        <Footer>
-          <FooterTab>
-            <Button active={this.props.footertab === 'feeds'} onPress={()=>this.props.onSwitchScreen("feeds")}>
-              <Icon  name="apps" />
-            </Button>
-            <Button active={this.props.footertab === 'exception'} onPress={()=>this.props.onSwitchScreen("exception")}>
-              <Icon  name="camera" />
-            </Button>
-            <Button active={this.props.footertab === 'setting'} onPress={()=>this.props.onSwitchScreen("setting")}>
-              <Icon  name="navigate" />
-            </Button>
-            <Button active={this.props.footertab === 'myself'} onPress={()=>this.props.onSwitchScreen("myself")}>
-              <Icon  name="person" />
-            </Button>
-          </FooterTab>
-        </Footer>
       </Container>
     );
   }
