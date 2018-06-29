@@ -1,36 +1,17 @@
 // @flow
 import React from "react";
-import { StackNavigator, DrawerNavigator } from "react-navigation";
 import { Root } from "native-base";
-import Login from "./container/LoginContainer";
-import Home from "./container/HomeContainer";
-import BlankPage from "./container/BlankPageContainer";
-import Sidebar from "./container/SidebarContainer";
-
-const Drawer = DrawerNavigator(
-	{
-		Home: { screen: Home },
-	},
-	{
-		initialRouteName: "Home",
-		contentComponent: props => <Sidebar {...props} />,
+import { isSignedIn } from './utils/authenticate'
+import RootNavigator from "./RootConfigure"
+export interface Props {}
+export interface State {}
+export default class App extends React.Component<Props , State> {
+	render() {
+ 			return (
+				<Root>
+					<RootNavigator />
+				</Root>
+			)
 	}
-);
+}
 
-const App = StackNavigator(
-	{
-		Login: { screen: Login },
-		BlankPage: { screen: BlankPage },
-		Drawer: { screen: Drawer },
-	},
-	{
-		initialRouteName: "Login",
-		headerMode: "none",
-	}
-);
-
-export default () => (
-	<Root>
-		<App />
-	</Root>
-);

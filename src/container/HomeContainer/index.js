@@ -3,7 +3,8 @@ import * as React from "react";
 import { observer, inject } from "mobx-react/native";
 
 import Home from "../../stories/screens/Home";
-import data from "./data";
+import ChildrenList from "../ChildrenList"
+
 
 export interface Props {
 	navigation: any,
@@ -14,11 +15,17 @@ export interface State {}
 @inject("mainStore")
 @observer
 export default class HomeContainer extends React.Component<Props, State> {
-	componentWillMount() {
-		this.props.mainStore.fetchItems(data);
+	onSearchChild(query:string) {
+		console.log("search", query)
+		this.props.mainStore.setQueryChild(query)
 	}
 	render() {
-		const list = this.props.mainStore.items.toJS();
-		return <Home navigation={this.props.navigation} list={list} />;
+		return (
+			<Home 
+				navigation={this.props.navigation} 
+				childrenList={<ChildrenList />}
+				onSearchChild={(query)=>this.onSearchChild(query)}
+			/>
+		);
 	}
 }

@@ -2,57 +2,45 @@ import * as React from "react";
 import {
   Container,
   Header,
-  Title,
   Content,
   Text,
   Button,
   Icon,
-  Left,
-  Body,
-  Right,
   List,
-  ListItem
+  ListItem , 
+  Item , 
+  Input,
+  Footer,
+  FooterTab
 } from "native-base";
-
 import styles from "./styles";
+
 export interface Props {
-  navigation: any;
-  list: any;
+  navigation: any,
+  childrenList: any,
+  onSearchChild: any,
 }
 export interface State {}
 class Home extends React.Component<Props, State> {
+  searchInput: any
   render() {
     return (
       <Container style={styles.container}>
-        <Header>
-          <Left>
-            <Button transparent>
-              <Icon
-                active
-                name="menu"
-                onPress={() => this.props.navigation.navigate("DrawerOpen")}
-              />
-            </Button>
-          </Left>
-          <Body>
-            <Title>Home</Title>
-          </Body>
-          <Right />
+        <Header searchBar rounded>
+          <Item>
+            <Icon name="ios-search" />
+            <Input 
+            ref={c => (this.searchInput = c)}
+            placeholder="Search" 
+            onChangeText={(e)=>this.props.onSearchChild(e)}/>
+            <Icon name="ios-people" />
+          </Item>
+          <Button transparent>
+            <Text>Search</Text>
+          </Button>
         </Header>
         <Content>
-          <List>
-            {this.props.list.map((item, i) => (
-              <ListItem
-                key={i}
-                onPress={() =>
-                  this.props.navigation.navigate("BlankPage", {
-                    name: { item }
-                  })}
-              >
-                <Text>{item}</Text>
-              </ListItem>
-            ))}
-          </List>
+          {this.props.childrenList}
         </Content>
       </Container>
     );

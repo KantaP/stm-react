@@ -1,5 +1,6 @@
 import * as Expo from "expo";
 import * as React from "react";
+import client from '../apollo/client'
 import { Provider } from "mobx-react/native";
 import { StyleProvider } from "native-base";
 import { ApolloProvider } from "react-apollo";
@@ -10,6 +11,7 @@ export interface Props {}
 export interface State {
 	isReady: boolean,
 }
+
 export default function(stores) {
 	return class Setup extends React.Component<Props, State> {
 		state: {
@@ -31,7 +33,7 @@ export default function(stores) {
 				Ionicons: require("@expo/vector-icons/fonts/Ionicons.ttf"),
 				Atvice: require("../../assets/fonts/ATViCE.ttf")
 			});
-
+			
 			this.setState({ isReady: true });
 		}
 
@@ -40,11 +42,13 @@ export default function(stores) {
 				return <Expo.AppLoading />;
 			}
 			return (
-				<StyleProvider style={getTheme(variables)}>
-					<Provider {...stores}>
-						<App />
-					</Provider>
-				</StyleProvider>
+				<ApolloProvider client={client}>
+					<StyleProvider style={getTheme(variables)}>
+						<Provider {...stores}>
+							<App />
+						</Provider>
+					</StyleProvider>
+				</ApolloProvider>
 			);
 		}
 	};

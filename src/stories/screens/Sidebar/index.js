@@ -21,10 +21,6 @@ export interface Props {
 	navigation: any,
 }
 export interface State {}
-const resetAction = NavigationActions.reset({
-	index: 0,
-	actions: [NavigationActions.navigate({ routeName: "Login" })],
-});
 export default class Sidebar extends React.Component<Props, State> {
 	render() {
 		return (
@@ -38,9 +34,7 @@ export default class Sidebar extends React.Component<Props, State> {
 								<ListItem
 									button
 									onPress={() => {
-										data.route === "Login"
-											? this.props.navigation.dispatch(resetAction)
-											: this.props.navigation.navigate(data.route);
+											 this.props.navigation.navigate(data.route);
 									}}
 								>
 									<Text>{data.caption}</Text>

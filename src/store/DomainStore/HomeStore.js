@@ -3,8 +3,20 @@ import { observable, action } from "mobx";
 class HomeStore {
   @observable hasErrored = false;
   @observable isLoading = true;
-  @observable user = Object.create(null)
+  @observable userData = Object.create(null)
   @observable items = [];
+  @observable footerActive = ""
+  @observable queryChild = ""
+
+  @action 
+  setFooter(footer) {
+    this.footerActive = footer
+  }
+
+  @action
+  setQueryChild(query) {
+    this.queryChild = query
+  }
 
   @action
   fetchItems(data) {
@@ -14,7 +26,7 @@ class HomeStore {
 
   @action
   setUser(data) {
-    this.user = data
+    this.userData = data
   }
 }
 
